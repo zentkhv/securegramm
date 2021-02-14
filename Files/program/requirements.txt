@@ -5,3 +5,4 @@ pysqlite3
 threaded
 pycryptodome
 lorem-text
+datetime

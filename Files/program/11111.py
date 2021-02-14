@@ -1,5 +1,3 @@
-
- 
 import asyncio
 from telethon import events
 from telethon import TelegramClient
@@ -11,6 +9,7 @@ import random
 import json
 import os
 from lorem_text import lorem
+from datetime import datetime
 
 
 db = sqlite3.connect('Account.db', timeout=30)
@@ -74,8 +73,10 @@ def Enter_pressed(event):
 
 	client.loop.run_until_complete(main())
 	
-	
-	messages.insert(INSERT, '%s\n' % input_get)
+	dt=datetime.now()
+	fulldt=dt.strftime("%d.%m.%y %H:%M")
+	input_get_format = f'{fulldt} You: {input_get}'
+	messages.insert(INSERT, '%s\n' % input_get_format)
 
 	input_user.set('')
 

@@ -45,10 +45,20 @@ print("==============================")
 print("Нажми Enter чтобы запустить...")
 input()
 
-api_id = input("Введи свой Api_id: ")
-api_hash = input("Введи свой Api_hash: ")
-name = input("Введи ник собеседника? ")
-passworld = input("Введи общий пароль, с вашим собеседником: ")
+#api_id = input("Введи свой Api_id: ")
+#api_hash = input("Введи свой Api_hash: ")
+#name = input("Введи ник собеседника? ")
+#passworld = input("Введи общий пароль, с вашим собеседником: ")
+
+api_id = '1666930693'
+print("api_id = 1666930693")
+api_hash = 'AAGgLYHpDjjWYyz0lB87oF5xjFJG1So9eWs'
+print("api_hash = AAGgLYHpDjjWYyz0lB87oF5xjFJG1So9eWs")
+name = '@mks_belka'
+print("name = @mks_belka")
+passworld = '260198'
+print("passworld = 260198")
+
 id_sob = "1"
 my_id = "1"
 
