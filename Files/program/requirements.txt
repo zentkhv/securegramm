@@ -1,6 +1,6 @@
 telethon
 asyncio
-tkintertable
+tkinterable
 pysqlite3
 threaded
 pycryptodome
