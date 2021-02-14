@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox as mb
 
-
 def check():
     answer = mb.askyesno(
         title="Вопрос",
@@ -13,7 +12,6 @@ def check():
 
 def info():
     mb.showinfo("Внимание", "Тут находится справка!")
-
 
 root = Tk()
 root.geometry('300x250')
