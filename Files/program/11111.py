@@ -73,6 +73,7 @@ def Enter_pressed(event):
 
 	client.loop.run_until_complete(main())
 	
+	#Формирование строки вывода в окно и вывод
 	dt=datetime.now()
 	fulldt=dt.strftime("%d.%m.%y %H:%M")
 	input_get_format = f'{fulldt} You: {input_get}'
