@@ -20,10 +20,10 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Account (
 
 db.commit()
 
-api_id = gui.start_id
-api_hash = gui.start_hash
-name = gui.start_friend
-password = gui.start_password
+api_id = '1666930693'
+api_hash = 'AAGgLYHpDjjWYyz0lB87oF5xjFJG1So9eWs'
+name = '@mks_belka'
+password = '260198'
 
 id_sob = "1"
 my_id = "1"

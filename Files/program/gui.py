@@ -9,6 +9,7 @@ start_id = ''
 start_hash = ''
 start_friend = ''
 start_password = ''
+wake = True
 
 # Классы
 
@@ -24,7 +25,7 @@ root.resizable(width=False, height=False)
 
 
 # Функции
-def button_enter_click():
+def button_enter_click(event):
     value_id = entry_id.get()
     value_hash = entry_hash.get()
     value_friend = entry_friend.get()
@@ -43,17 +44,10 @@ def button_enter_click():
     file.close()
 
     # Выполнение начинки файла 1.py
-
-    process = subprocess.Popen([sys.executable, "start.py"])
+    wake = False
+    process = subprocess.Popen([sys.executable, "1.py"])
     process.wait()
     time.sleep(0.2)
-
-    process3 = subprocess.Popen([sys.executable, "OBMEN.py"])
-    process3.wait()
-    time.sleep(0.2)
-
-    process2 = subprocess.Popen([sys.executable, "11111.py"])
-    process2.wait()
 
 
 # Создание элементов
@@ -108,4 +102,5 @@ entry_password.insert(0, fd[3][0:len(fd[3]) - 1])
 f.close()
 
 # Петля IndexError
-root.mainloop()
+while wake == True:
+    root.mainloop()
