@@ -1,5 +1,17 @@
 from tkinter import *
 from tkinter import messagebox
+import subprocess
+import sys
+import time
+
+# Глобальные переменные
+start_id = ''
+start_hash = ''
+start_friend = ''
+start_password = ''
+
+# Классы
+
 
 # Параметры главного окна
 root = Tk()
@@ -7,7 +19,7 @@ root = Tk()
 root['bg'] = '#ccc'
 root.title('Securegram. Параметры ')
 # root.wm_attributes('-alpha', 0.7)   Прозрачность окна
-root.geometry('310x400')
+root.geometry('500x350')
 root.resizable(width=False, height=False)
 
 
@@ -18,6 +30,11 @@ def button_enter_click():
     value_friend = entry_friend.get()
     value_password = entry_password.get()
 
+    start_id = value_id
+    start_hash = value_hash
+    start_friend = value_friend
+    start_password = value_password
+
     file = open('last_session.txt', 'w')
     file.writelines(value_id + '\n')
     file.writelines(value_hash + '\n')
@@ -25,22 +42,34 @@ def button_enter_click():
     file.writelines(value_password + '\n')
     file.close()
 
-    messagebox.showinfo('Успех', f'Вход совершен, данные записаны. value_id: {value_id}')
+    # Выполнение начинки файла 1.py
+
+    process = subprocess.Popen([sys.executable, "start.py"])
+    process.wait()
+    time.sleep(0.2)
+
+    process3 = subprocess.Popen([sys.executable, "OBMEN.py"])
+    process3.wait()
+    time.sleep(0.2)
+
+    process2 = subprocess.Popen([sys.executable, "11111.py"])
+    process2.wait()
 
 
 # Создание элементов
 label_id = Label(text='API ID', font='Comfort 15', fg='#3d3d42', bg='#ccc')
-entry_id = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=15)
+entry_id = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=40)
 # relief: solid, raised, ridge, groove, flat, sunken
 
 label_hash = Label(text='API Hash', font='Comfort 15', fg='#3d3d42', bg='#ccc')
-entry_hash = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=20)
+entry_hash = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=40)
 
 label_friend = Label(text='Ник собеседника', font='Comfort 15', fg='#3d3d42', bg='#ccc')
-entry_friend = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=10)
+entry_friend = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=40)
 
 label_password = Label(text='Общий пароль', font='Comfort 15', fg='#3d3d42', bg='#ccc')
-entry_password = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', show='*')
+entry_password = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid',
+                       justify='center', show='*', width=40)
 
 checkbutton_save = Checkbutton(text='Не записывать данные соединения', font='Comfort 12', fg='#3d3d42', bg='#ccc',
                                activeforeground='#3d3d42',
