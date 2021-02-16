@@ -1,15 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
-import subprocess
-import sys
-import time
 
 # Глобальные переменные
-start_id = ''
-start_hash = ''
-start_friend = ''
-start_password = ''
-wake = True
+
 
 # Классы
 
@@ -31,23 +24,12 @@ def button_enter_click(event):
     value_friend = entry_friend.get()
     value_password = entry_password.get()
 
-    start_id = value_id
-    start_hash = value_hash
-    start_friend = value_friend
-    start_password = value_password
-
     file = open('last_session.txt', 'w')
     file.writelines(value_id + '\n')
     file.writelines(value_hash + '\n')
     file.writelines(value_friend + '\n')
     file.writelines(value_password + '\n')
     file.close()
-
-    # Выполнение начинки файла 1.py
-    wake = False
-    process = subprocess.Popen([sys.executable, "1.py"])
-    process.wait()
-    time.sleep(0.2)
 
 
 # Создание элементов
@@ -102,5 +84,4 @@ entry_password.insert(0, fd[3][0:len(fd[3]) - 1])
 f.close()
 
 # Петля IndexError
-while wake == True:
-    root.mainloop()
+root.mainloop()
