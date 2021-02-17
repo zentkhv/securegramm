@@ -1,10 +1,6 @@
 import sqlite3
 from telethon import TelegramClient
-import time
-import subprocess
-import sys
 import json
-import gui
 
 db = sqlite3.connect('Account.db', timeout=30)
 cur = db.cursor()
