@@ -63,7 +63,7 @@ class Child(tk.Toplevel):
         self.title('Диалог с ...')
         self.geometry('400x220+400+300')
         self.resizable(False, False)
-        self.iconbitmap('telegram.ico')
+        #self.iconbitmap('telegram.ico')
 
         self.grab_set()
         self.focus_set()
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     app.pack()
     root.title("Securegram. Настройка соединения")
     root.geometry("550x140+300+200")
-    root.iconbitmap('telegram.ico')
+    #root.iconbitmap('telegram.ico')
     root.resizable(False, False)
 
     root.mainloop()

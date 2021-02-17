@@ -2,10 +2,16 @@ from tkinter import *
 from tkinter import messagebox
 
 # Глобальные переменные
+<<<<<<< HEAD
+start_id = ''
+start_hash = ''
+start_friend = ''
+start_password = ''
+=======
 
+>>>>>>> 52ff0d17e244b6e8bdd5c74228b075092dc2bf42
 
 # Классы
-
 
 # Параметры главного окна
 root = Tk()
@@ -31,11 +37,18 @@ def button_enter_click(event):
     file.writelines(value_password + '\n')
     file.close()
 
+<<<<<<< HEAD
+    # Выполнение начинки файла 1.py
+    process = subprocess.Popen([sys.executable, "1.py"])
+    process.wait()
+    time.sleep(0.2)
+
+=======
+>>>>>>> 52ff0d17e244b6e8bdd5c74228b075092dc2bf42
 
 # Создание элементов
 label_id = Label(text='API ID', font='Comfort 15', fg='#3d3d42', bg='#ccc')
 entry_id = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=40)
-# relief: solid, raised, ridge, groove, flat, sunken
 
 label_hash = Label(text='API Hash', font='Comfort 15', fg='#3d3d42', bg='#ccc')
 entry_hash = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=40)
