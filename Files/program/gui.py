@@ -9,10 +9,8 @@ start_id = ''
 start_hash = ''
 start_friend = ''
 start_password = ''
-wake = True
 
 # Классы
-
 
 # Параметры главного окна
 root = Tk()
@@ -44,7 +42,6 @@ def button_enter_click(event):
     file.close()
 
     # Выполнение начинки файла 1.py
-    wake = False
     process = subprocess.Popen([sys.executable, "1.py"])
     process.wait()
     time.sleep(0.2)
@@ -53,7 +50,6 @@ def button_enter_click(event):
 # Создание элементов
 label_id = Label(text='API ID', font='Comfort 15', fg='#3d3d42', bg='#ccc')
 entry_id = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=40)
-# relief: solid, raised, ridge, groove, flat, sunken
 
 label_hash = Label(text='API Hash', font='Comfort 15', fg='#3d3d42', bg='#ccc')
 entry_hash = Entry(root, font='Consoles 15', fg='#eff5c9', bg='#48494f', relief='solid', justify='center', width=40)
@@ -102,5 +98,4 @@ entry_password.insert(0, fd[3][0:len(fd[3]) - 1])
 f.close()
 
 # Петля IndexError
-while wake == True:
-    root.mainloop()
+root.mainloop()
