@@ -1,7 +1,5 @@
 import tkinter as tk
-
-
-# from tkinter import *
+from tkinter import ttk
 
 
 # Класс основного окна
@@ -21,6 +19,47 @@ class Main(tk.Frame):
                                        compound=tk.TOP, image=self.add_img)
         button_open_dialog.pack(side=tk.LEFT)
 
+
+        # Подписи к полям ввода
+        label_id = tk.Label(self, text='API ID')
+        label_id.place(x=50, y=50)
+
+        label_hash = tk.Label(self, text='API Hash')
+        label_hash.place(x=50, y=80)
+
+        label_friend = tk.Label(self, text='Ник собеседника')
+        label_friend.place(x=50, y=110)
+
+        label_password = tk.Label(self, text='Общий пароль')
+        label_password.place(x=50, y=140)
+
+        # Поля ввода
+        self.entry_id = ttk.Entry(self)
+        self.entry_id.place(x=200, y=50)
+
+        self.entry_hash = ttk.Entry(self)
+        self.entry_hash.place(x=200, y=80)
+
+        self.entry_friend = ttk.Entry(self)
+        self.entry_friend.place(x=200, y=110)
+
+        self.entry_password = ttk.Entry(self)
+        self.entry_password.place(x=200, y=140)
+
+        # Поля для вывода информации в виде близком к таблице
+        # self.tree = ttk.Treeview(self, columns=('ID', 'description', 'cost', 'total'), height=15, show="headings")
+        #
+        # self.tree.column('ID', width=30, anchor=tk.CENTER)
+        # self.tree.column('description', width=30, anchor=tk.CENTER)
+        # self.tree.column('cost', width=30, anchor=tk.CENTER)
+        # self.tree.column('total', width=30, anchor=tk.CENTER)
+        #
+        # self.tree.heading('ID', text='ID')
+        # self.tree.heading('description', text='Наименование')
+        # self.tree.heading('cost', text='Статья дохода или расхода')
+        # self.tree.heading('total', text='Сумма')
+        # self.tree.pack()
+
     def open_dialog(self):
         Child()
 
@@ -38,6 +77,32 @@ class Child(tk.Toplevel):
 
         self.grab_set()
         self.focus_set()
+
+        # Подписи к полям ввода
+        label_id = tk.Label(self, text='API ID')
+        label_id.place(x=50, y=50)
+
+        label_hash = tk.Label(self, text='API Hash')
+        label_hash.place(x=50, y=80)
+
+        label_friend = tk.Label(self, text='Ник собеседника')
+        label_friend.place(x=50, y=110)
+
+        label_password = tk.Label(self, text='Общий пароль')
+        label_password.place(x=50, y=140)
+
+        # Поля ввода
+        self.entry_id = ttk.Entry(self)
+        self.entry_id.place(x=200, y=50)
+
+        self.entry_hash = ttk.Entry(self)
+        self.entry_hash.place(x=200, y=80)
+
+        self.entry_friend = ttk.Entry(self)
+        self.entry_friend.place(x=200, y=110)
+
+        self.entry_password = ttk.Entry(self)
+        self.entry_password.place(x=200, y=140)
 
 
 # Условие проверяющее, вызывается ли скрипт как основной
