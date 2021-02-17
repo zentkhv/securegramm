@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 
 # Класс основного окна
@@ -12,53 +13,41 @@ class Main(tk.Frame):
 
     # Создание элементов окна
     def init_main(self):
-        toolbar = tk.Frame(bg="#d7d8e0", bd=2)
-        toolbar.pack(side=tk.TOP, fill=tk.X)
+        frame_toolbar = tk.Frame(bg="#d7d8e0")
+        frame_toolbar.pack(side=tk.TOP, fill=tk.X)
 
-        button_open_dialog = tk.Button(toolbar, text="Соединить", command=self.open_dialog, bg='#d7d8e0', bd=0,
+        button_open_dialog = tk.Button(frame_toolbar, text="Соединить", command=self.open_dialog, bg='#d7d8e0', bd=0,
                                        compound=tk.TOP, image=self.add_img)
-        button_open_dialog.pack(side=tk.LEFT)
+        button_open_dialog.pack(side=tk.RIGHT)
 
+        canvas = tk.Canvas(self)
+        canvas.pack(fill=tk.X)
 
         # Подписи к полям ввода
-        label_id = tk.Label(self, text='API ID')
-        label_id.place(x=50, y=50)
+        label_id = tk.Label(frame_toolbar, text='API ID', bg="#d7d8e0")
+        label_id.place(x=20, y=10)
 
-        label_hash = tk.Label(self, text='API Hash')
-        label_hash.place(x=50, y=80)
+        label_hash = tk.Label(frame_toolbar, text='API Hash', bg="#d7d8e0")
+        label_hash.place(x=20, y=40)
 
-        label_friend = tk.Label(self, text='Ник собеседника')
-        label_friend.place(x=50, y=110)
+        label_friend = tk.Label(frame_toolbar, text='Ник собеседника', bg="#d7d8e0")
+        label_friend.place(x=20, y=70)
 
-        label_password = tk.Label(self, text='Общий пароль')
-        label_password.place(x=50, y=140)
+        label_password = tk.Label(frame_toolbar, text='Общий пароль', bg="#d7d8e0")
+        label_password.place(x=20, y=100)
 
         # Поля ввода
-        self.entry_id = ttk.Entry(self)
-        self.entry_id.place(x=200, y=50)
+        self.entry_id = ttk.Entry(frame_toolbar, width=40)
+        self.entry_id.place(x=140, y=10)
 
-        self.entry_hash = ttk.Entry(self)
-        self.entry_hash.place(x=200, y=80)
+        self.entry_hash = ttk.Entry(frame_toolbar, width=40)
+        self.entry_hash.place(x=140, y=40)
 
-        self.entry_friend = ttk.Entry(self)
-        self.entry_friend.place(x=200, y=110)
+        self.entry_friend = ttk.Entry(frame_toolbar, width=40)
+        self.entry_friend.place(x=140, y=70)
 
-        self.entry_password = ttk.Entry(self)
-        self.entry_password.place(x=200, y=140)
-
-        # Поля для вывода информации в виде близком к таблице
-        # self.tree = ttk.Treeview(self, columns=('ID', 'description', 'cost', 'total'), height=15, show="headings")
-        #
-        # self.tree.column('ID', width=30, anchor=tk.CENTER)
-        # self.tree.column('description', width=30, anchor=tk.CENTER)
-        # self.tree.column('cost', width=30, anchor=tk.CENTER)
-        # self.tree.column('total', width=30, anchor=tk.CENTER)
-        #
-        # self.tree.heading('ID', text='ID')
-        # self.tree.heading('description', text='Наименование')
-        # self.tree.heading('cost', text='Статья дохода или расхода')
-        # self.tree.heading('total', text='Сумма')
-        # self.tree.pack()
+        self.entry_password = ttk.Entry(frame_toolbar, width=40)
+        self.entry_password.place(x=140, y=100)
 
     def open_dialog(self):
         Child()
@@ -74,35 +63,10 @@ class Child(tk.Toplevel):
         self.title('Диалог с ...')
         self.geometry('400x220+400+300')
         self.resizable(False, False)
+        self.iconbitmap('telegram.ico')
 
         self.grab_set()
         self.focus_set()
-
-        # Подписи к полям ввода
-        label_id = tk.Label(self, text='API ID')
-        label_id.place(x=50, y=50)
-
-        label_hash = tk.Label(self, text='API Hash')
-        label_hash.place(x=50, y=80)
-
-        label_friend = tk.Label(self, text='Ник собеседника')
-        label_friend.place(x=50, y=110)
-
-        label_password = tk.Label(self, text='Общий пароль')
-        label_password.place(x=50, y=140)
-
-        # Поля ввода
-        self.entry_id = ttk.Entry(self)
-        self.entry_id.place(x=200, y=50)
-
-        self.entry_hash = ttk.Entry(self)
-        self.entry_hash.place(x=200, y=80)
-
-        self.entry_friend = ttk.Entry(self)
-        self.entry_friend.place(x=200, y=110)
-
-        self.entry_password = ttk.Entry(self)
-        self.entry_password.place(x=200, y=140)
 
 
 # Условие проверяющее, вызывается ли скрипт как основной
@@ -111,7 +75,8 @@ if __name__ == "__main__":
     app = Main(root)
     app.pack()
     root.title("Securegram. Настройка соединения")
-    root.geometry("650x450+200+200")
+    root.geometry("550x140+300+200")
+    root.iconbitmap('telegram.ico')
     root.resizable(False, False)
 
     root.mainloop()
