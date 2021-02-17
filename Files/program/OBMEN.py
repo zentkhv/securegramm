@@ -1,7 +1,6 @@
 from telethon import sync, events
 import time
 from telethon import TelegramClient
-
 import sqlite3
 
 db = sqlite3.connect('Account.db', timeout=30)
