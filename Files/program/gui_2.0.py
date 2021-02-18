@@ -67,8 +67,12 @@ class Main(tk.Frame):
     # Метод 0-ой фазы: открытие дочернего окна и сохранения данных о сессии в файл, переход на 1-ую фазу
     def stage_0(self):
         self.save_session_data()
-        Child()
-        self.stage_1()
+
+        process = subprocess.Popen([sys.executable, "main.py"])
+        process.wait()
+        time.sleep(0.2)
+
+        # Child()
 
     # Метод заполнения полей значениями из файла
     def fill_entry(self):
@@ -88,104 +92,6 @@ class Main(tk.Frame):
         file.writelines(self.entry_friend.get() + '\n')
         file.writelines(self.entry_password.get() + '\n')
         file.close()
-
-    # Метод фазы №1: создание БД, подключение к API 2 раза (одна сессия слушает, вторая говорит)
-    def stage_1(self):
-        db = sqlite3.connect('Account.db', timeout=30)
-        cur = db.cursor()
-
-        cur.execute("""CREATE TABLE IF NOT EXISTS Account (
-            ID INTEGER PRIMARY KEY,
-            API_ID TEXT,
-            API_HASH TEXT,
-            NAME TEXT,
-            ID_SOB TEXT,
-            MY_ID TEXT
-        )""")
-
-        db.commit()
-
-        api_id = self.entry_id.get()
-        api_hash = self.entry_hash.get()
-        name = self.entry_friend.get()
-        password = self.entry_password.get()
-
-        id_sob = "1"
-        my_id = "1"
-
-        with open("1.json") as f:
-            data = f.read()
-        d = json.loads(data)
-        d["password"] = password
-        with open("1.json", 'w') as f:
-            f.write(json.dumps(d))
-
-        with open("2.json") as f2:
-            data2 = f2.read()
-        d2 = json.loads(data2)
-        d2["password"] = password
-        with open("2.json", 'w') as f2:
-            f2.write(json.dumps(d2))
-
-        cur.execute(f"SELECT API_ID FROM Account WHERE API_ID = '{api_id}'")
-        if cur.fetchone() is None:
-            cur.execute("""INSERT INTO Account(API_ID, API_HASH, NAME, ID_SOB, MY_ID) VALUES (?,?,?,?,?);""",
-                        (api_id, api_hash, name, id_sob, my_id))
-            db.commit()
-            print("Зарегистрированно!")
-
-        z = 1
-
-        while True:
-            session = "anon3" + str(z)
-            client = TelegramClient(session, api_id, api_hash)
-            client.start()
-            print("Аккаунт: " + str(z) + " Вход выполнен успешно!")
-            z = z + 1
-            if z == 3:
-                print("Аккауты активированы!")
-                break
-            self.stage_2()
-
-
-    # Метод фазы №2: обмен открытыми ключами
-    def stage_2(self):
-        db = sqlite3.connect('Account.db', timeout=30)
-        cur = db.cursor()
-
-        cur.execute(f"SELECT API_ID FROM Account WHERE ID = '{1}'")
-
-        api_id = str(cur.fetchone()[0])
-        time.sleep(1)
-        cur.execute(f"SELECT API_HASH FROM Account WHERE ID = '{1}'")
-
-        api_hash = str(cur.fetchone()[0])
-        time.sleep(1)
-
-        session = "anon31"
-        client = TelegramClient(session, api_id, api_hash)
-        client.start()
-
-        myself = client.get_me()
-        k = str(myself.id)
-        cur.execute(f'UPDATE Account SET MY_ID = ? WHERE ID = ?', (k, 1))
-        db.commit()
-        time.sleep(1)
-
-        cur.execute(f"SELECT NAME FROM Account WHERE ID = '{1}'")
-        name = str(cur.fetchone()[0])
-        print(name)
-        time.sleep(1)
-
-        entity = client.get_entity(name)
-
-        id_Friend = entity.id
-        m = str(id_Friend)
-        print(m)
-        time.sleep(1)
-        cur.execute(f'UPDATE Account SET ID_SOB = ? WHERE ID = ?', (m, 1))
-        db.commit()
-        time.sleep(1)
 
 # Класс дочернего окна, вызываемого основным
 class Child(tk.Toplevel):
