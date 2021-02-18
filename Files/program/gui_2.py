@@ -1,19 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
 import subprocess
-import sys
 import time
-import sqlite3
-from telethon import TelegramClient
-import json
-import asyncio
-from telethon import events
 from tkinter import *
-import threading
-import os
-from lorem_text import lorem
-from datetime import datetime
 
 
 # Класс основного окна
@@ -65,12 +54,16 @@ class Main(tk.Frame):
         self.entry_password.place(x=140, y=100)
 
     # Метод 0-ой фазы: открытие дочернего окна и сохранения данных о сессии в файл, переход на 1-ую фазу
+
+    def get_values (self):
+        return [self.entry_id.get(), self.entry_hash.get(), self.entry_friend.get(), self.entry_password.get()]
+
     def stage_0(self):
         self.save_session_data()
 
         process = subprocess.Popen([sys.executable, "main.py"])
         process.wait()
-        time.sleep(0.2)
+        time.sleep(0.1)
 
         # Child()
 
