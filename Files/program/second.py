@@ -32,7 +32,6 @@ name = str(cur.fetchone()[0])
 print(name)
 time.sleep(0.1)
 
-#entity = client.get_dialogs()
 entity = client.get_entity(name)
 
 id_Friend = entity.id

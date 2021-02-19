@@ -9,27 +9,37 @@ import json
 import os
 from lorem_text import lorem
 from datetime import datetime
-from tkinter import messagebox
-
 
 db = sqlite3.connect('Account.db', timeout=30)
 cur = db.cursor()
 
-window = Tk()
+cur.execute(f"SELECT NAME FROM Account WHERE ID = '{1}'")
+friend = str(cur.fetchone()[0])
+time.sleep(0.1)
 
-messages = Text(window)
+window = Tk()
+window.resizable(False, False)
+window.grab_set()
+window.focus_set()
+window.title(f'Securegram. Диалог с {friend}')
+
+messages = Text(window, bg="#d7d8e0")
+
+f = open('self_name.txt')
+self_name = str(f.readlines()[0])
+f.close()
 
 input_user = StringVar()
 input_field = Entry(window, text=input_user)
 
 cur.execute(f"SELECT API_ID FROM Account WHERE ID = '{1}'")
-
 api_id = str(cur.fetchone()[0])
 time.sleep(0.1)
-cur.execute(f"SELECT API_HASH FROM Account WHERE ID = '{1}'")
 
+cur.execute(f"SELECT API_HASH FROM Account WHERE ID = '{1}'")
 api_hash = str(cur.fetchone()[0])
 time.sleep(0.1)
+
 session = "anon31"
 
 client = TelegramClient("anon31", api_id, api_hash).start()
@@ -72,11 +82,8 @@ def Enter_pressed(event):
 
     client.loop.run_until_complete(main())
 
-    # Формирование строки вывода в окно и вывод
-    dt = datetime.now()
-    fulldt = dt.strftime("%d.%m.%y %H:%M")
-    input_get_format = f'{fulldt} You: {input_get}'
-    messages.insert(INSERT, '%s\n' % input_get_format)
+    # Формирование строки вывода в окно и непосредственно вывод
+    messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {self_name}: {input_get}')
 
     input_user.set('')
 
@@ -116,11 +123,13 @@ async def async_run_events(loop):
                 data2 = f1.read()
             print(data2)
 
-        messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} Friend: {data2}')
+        # Формирование строки вывода  в окно и непосредственно вывод
+        messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {friend}: {data2}')
 
     # messages.insert(INSERT, '%s\n' % data2)
 
     await eventing_client.run_until_disconnected()
+
 
 threading.Thread(target=run_bot_events).start()
 window.mainloop()

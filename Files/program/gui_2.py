@@ -1,8 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 import subprocess
+import sys  # Используется!
 import time
 from tkinter import *
+import re
+from tkinter import messagebox
 
 
 # Класс основного окна
@@ -55,35 +58,44 @@ class Main(tk.Frame):
 
     # Метод 0-ой фазы: открытие дочернего окна и сохранения данных о сессии в файл, переход на 1-ую фазу
 
-    def get_values (self):
-        return [self.entry_id.get(), self.entry_hash.get(), self.entry_friend.get(), self.entry_password.get()]
-
     def stage_0(self):
         self.save_session_data()
+        self.transfer_password()
 
         process = subprocess.Popen([sys.executable, "main.py"])
         process.wait()
         time.sleep(0.1)
+        # Tk.protocol("WM_DELETE_WINDOW", print('Главное окно закрыто'))
 
         # Child()
 
-    # Метод заполнения полей значениями из файла
+    # Метод заполнения полей значениями из файла и проверки
     def fill_entry(self):
         f = open('last_session.txt')
-        fd = f.readlines()
-        self.entry_id.insert(0, fd[0][0:len(fd[0]) - 1])
-        self.entry_hash.insert(0, fd[1][0:len(fd[1]) - 1])
-        self.entry_friend.insert(0, fd[2][0:len(fd[2]) - 1])
-        self.entry_password.insert(0, fd[3][0:len(fd[3]) - 1])
+        data = f.readlines()[0].split(',')
+        for i in range(0, len(data)):
+            data[i] = re.sub("^\s+|\n|\r|\s+$", "", str(data[i]))
+        if len(data) == 3:
+            self.entry_id.insert(0, data[0])
+            self.entry_hash.insert(0, data[1])
+            self.entry_friend.insert(0, data[2])
+        else:
+            messagebox.showwarning("Внимание", "Не удалось загрузить данные о прошлой сессии.\nФайл будет перезаписан "
+                                               "после установления следующего соединения.")
         f.close()
 
     # Метод записи данных о сессии в файл
     def save_session_data(self):
         file = open('last_session.txt', 'w')
-        file.writelines(self.entry_id.get() + '\n')
-        file.writelines(self.entry_hash.get() + '\n')
-        file.writelines(self.entry_friend.get() + '\n')
-        file.writelines(self.entry_password.get() + '\n')
+        file.writelines(f'{self.entry_id.get()},{self.entry_hash.get()},{self.entry_friend.get()}')
+        file.close()
+
+    def transfer_password(self):
+        file = open('last_password.txt', 'w')
+        if self.entry_password.get() != '':
+            file.writelines(f'{self.entry_password.get()}')
+        else:
+            file.writelines(' ')
         file.close()
 
 # Класс дочернего окна, вызываемого основным

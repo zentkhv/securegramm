@@ -16,10 +16,23 @@ cur.execute("""CREATE TABLE IF NOT EXISTS Account (
 
 db.commit()
 
-api_id = '1666930693'
-api_hash = 'AAGgLYHpDjjWYyz0lB87oF5xjFJG1So9eWs'
-name = '@mks_belka'
-password = '260198'
+f = open('last_session.txt')
+data_file = f.readlines()[0].split(',')
+f.close()
+
+f = open('last_password.txt')
+data_pass = str(f.readlines()[0])
+if data_pass == ' ':
+    data_pass = ''
+f.close()
+
+f = open('last_password.txt', 'w')
+f.close()
+
+api_id = data_file[0]
+api_hash = data_file[1]
+name = data_file[2]
+password = data_pass
 
 id_sob = "1"
 my_id = "1"
