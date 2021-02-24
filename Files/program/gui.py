@@ -79,10 +79,10 @@ button_enter.pack()
 
 f = open('last_session.txt')
 fd = f.readlines()
-entry_id.insert(0, fd[0][0:len(fd[0]) - 1])
-entry_hash.insert(0, fd[1][0:len(fd[1]) - 1])
-entry_friend.insert(0, fd[2][0:len(fd[2]) - 1])
-entry_password.insert(0, fd[3][0:len(fd[3]) - 1])
+# entry_id.insert(0, fd[0][0:len(fd[0]) - 1])
+# entry_hash.insert(0, fd[1][0:len(fd[1]) - 1])
+# entry_friend.insert(0, fd[2][0:len(fd[2]) - 1])
+# entry_password.insert(0, fd[3][0:len(fd[3]) - 1])
 f.close()
 
 # Петля IndexError

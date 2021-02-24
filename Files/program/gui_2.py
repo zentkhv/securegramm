@@ -13,7 +13,7 @@ class Main(tk.Frame):
     # Конструктор
     def __init__(self, root):
         super().__init__(root)
-        self.add_img = tk.PhotoImage(file='connection2.png')
+        self.add_img = tk.PhotoImage(file='image/connection2.png')
         self.init_main()
 
     # Создание элементов окна
