@@ -138,7 +138,7 @@ class Main(tk.Frame):
         Nickname()
 
     def start_connect(self):
-        if self.entry_id.get() == '' or self.entry_hash.get() == '' or self.entry_friend == '':
+        if self.entry_id.get() == '' or self.entry_hash.get() == '' or self.entry_friend.get() == '':
             messagebox.showerror("Ошибка ввода данных", "Недостаточно данных!\nСоединение не удалось...")
         else:
             messagebox.showinfo("Успех", "Проверка ввода данных пройдена.")
@@ -246,6 +246,7 @@ class Nickname(tk.Toplevel):
             messagebox.showinfo('Успех', 'Ваше имя пользователя успешно изменено!')
         else:
             self.destroy()
+            # self.quit()
             messagebox.showwarning('Внимание', 'Изменение не удалось.\n Ваше имя пользователя не изменилось.')
 
 
