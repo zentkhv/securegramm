@@ -1,6 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox
 import re
+import subprocess
+import sys  # Используется!
+import time
+from tkinter import *
 
 # Мастер-цвета
 master_color_1 = '#f0f0f0'
@@ -137,11 +141,37 @@ class Main(tk.Frame):
     def open_nickname(self):
         Nickname()
 
+    def save_session_data(self):
+        file = open('last_session.txt', 'w')
+        file.writelines(f'{self.entry_id.get()},{self.entry_hash.get()},{self.entry_friend.get()}')
+        file.close()
+
+    def transfer_password(self):
+        file = open('last_password.txt', 'w')
+        if self.entry_password.get() != '':
+            file.writelines(f'{self.entry_password.get()}')
+        else:
+            file.writelines(' ')
+        file.close()
+
     def start_connect(self):
         if self.entry_id.get() == '' or self.entry_hash.get() == '' or self.entry_friend.get() == '':
             messagebox.showerror("Ошибка ввода данных", "Недостаточно данных!\nСоединение не удалось...")
         else:
-            messagebox.showinfo("Успех", "Проверка ввода данных пройдена.")
+            self.save_session_data()
+            self.transfer_password()
+
+            process = subprocess.Popen([sys.executable, "first.py"])
+            process.wait()
+            time.sleep(0.1)
+
+            process2 = subprocess.Popen([sys.executable, "second.py"])
+            process2.wait()
+            time.sleep(0.1)
+
+            process3 = subprocess.Popen([sys.executable, "third.py"])
+            # process3.wait()
+            time.sleep(0.1)
 
 
 # Класс для создания окна "Об авторе"
@@ -248,6 +278,10 @@ class Nickname(tk.Toplevel):
             self.destroy()
             # self.quit()
             messagebox.showwarning('Внимание', 'Изменение не удалось.\n Ваше имя пользователя не изменилось.')
+
+
+def destroy_main(root):
+    root.destroy()
 
 
 # Тело программы

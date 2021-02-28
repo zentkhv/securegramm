@@ -9,6 +9,7 @@ import json
 import os
 from lorem_text import lorem
 from datetime import datetime
+import sys
 
 db = sqlite3.connect('Account.db', timeout=30)
 cur = db.cursor()
@@ -133,3 +134,7 @@ async def async_run_events(loop):
 
 threading.Thread(target=run_bot_events).start()
 window.mainloop()
+
+
+
+
