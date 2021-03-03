@@ -24,10 +24,15 @@ class Main(tk.Frame):
     # Конструктор
     def __init__(self, root):
         super().__init__(root)
+        self.state = False
         self.add_img_connect = tk.PhotoImage(file='image/connect.png')
         self.add_img_info = tk.PhotoImage(file='image/info.png')
         self.add_img_rename = tk.PhotoImage(file='image/rename.png')
         self.add_img_about = tk.PhotoImage(file='image/about.png')
+
+        self.add_img_light_red = tk.PhotoImage(file='image/light_red.png')
+        self.add_img_light_yellow = tk.PhotoImage(file='image/light_yellow.png')
+        self.add_img_light_green = tk.PhotoImage(file='image/light_green.png')
         self.init_main()
 
     # Создание элементов окна
@@ -41,25 +46,23 @@ class Main(tk.Frame):
         def setup_button():
             return tk.Button(frame_toolbar, bg=master_color_1, bd=0, fg=master_color_4, compound=tk.TOP, font='Tahoma')
 
-        # Кнопка "Соединить"
-        button_connect = setup_button()
-        button_connect.config(text="Начать", image=self.add_img_connect, command=self.start_connect)
-        button_connect.pack(side=tk.LEFT)
-
         # Кнопка "Смена ника"
         button_rename = setup_button()
-        button_rename.config(text="Смена ника", image=self.add_img_rename, command=self.open_nickname)
-        button_rename.pack(side=tk.LEFT)
+        button_rename.config(text="Смена имени", image=self.add_img_rename, command=self.open_nickname)
+        # button_rename.pack(side=tk.LEFT)
+        button_rename.grid(row=0, column=0, padx=20)
 
         # Кнопка "О программе"
         button_info = setup_button()
         button_info.config(text="О программе", image=self.add_img_info, command=self.open_info)
-        button_info.pack(side=tk.LEFT)
+        # button_info.pack(side=tk.LEFT)
+        button_info.grid(row=0, column=1, padx=20)
 
         # Кнопка "Об авторе"
         button_about = setup_button()
         button_about.config(text="Об авторе", image=self.add_img_about, command=self.open_about)
-        button_about.pack(side=tk.LEFT)
+        # button_about.pack(side=tk.LEFT)
+        button_about.grid(row=0, column=2, padx=20)
 
         # Разделяющий фрэйм
         frame_separation = tk.Frame(bg=master_color_5)
@@ -68,7 +71,7 @@ class Main(tk.Frame):
         # Промежуточный фрэйм для подписи над полями
         frame_middle = tk.Frame(bg=master_color_1)
         frame_middle.pack(side=tk.TOP, fill=tk.X)
-        tk.Label(frame_middle, text='Данные для подключения', font='Calibri 20', bg=master_color_1,
+        tk.Label(frame_middle, text='Данные для подключения', font='Calibri 16', bg=master_color_1,
                  fg=master_color_4).pack()
 
         # Фрэйм для полей ввода и лейблов
@@ -82,7 +85,7 @@ class Main(tk.Frame):
 
         # Мастер-entry
         def setup_entry():
-            return tk.Entry(frame_entry, width=40, bg=master_color_3, fg=master_color_2, font=10)
+            return tk.Entry(frame_entry, width=37, bg=master_color_3, fg=master_color_2, font=10)
 
         # Объекты API ID
         label_id = setup_label()
@@ -106,6 +109,9 @@ class Main(tk.Frame):
         self.entry_password = setup_entry()
         self.entry_password.config(show='*')
 
+        self.button_connect = tk.Button(frame_entry, text="Подключиться", relief='groove', font='Tahoma',
+                                        command=self.start_connect)
+
         # Расположение entry и label
         label_id.grid(row=0, column=0, sticky="W,E")
         label_hash.grid(row=1, column=0, sticky="W,E")
@@ -116,6 +122,26 @@ class Main(tk.Frame):
         self.entry_hash.grid(row=1, column=1, pady=5)
         self.entry_friend.grid(row=2, column=1, pady=5)
         self.entry_password.grid(row=3, column=1, pady=5)
+
+        self.button_connect.grid(row=4, column=0, columnspan=2)
+
+        # Разделяющий фрэйм
+        frame_separation1 = tk.Frame(bg=master_color_5)
+        frame_separation1.pack(side=tk.TOP, fill=tk.X, ipady=5)
+
+        # Промежуточный фрэйм для подписи над полями
+        frame_connect = tk.Frame(bg=master_color_1)
+        frame_connect.pack(side=tk.TOP, fill=tk.X)
+        self.label_connection = tk.Label(frame_connect, text='Соединение не установлено', font='Calibri 16',
+                                         bg=master_color_1, fg=master_color_4)
+        self.label_connection.pack()
+
+        # Фрэйм для полей ввода и лейблов
+        frame_end = tk.Frame(bg=master_color_1)
+        frame_end.pack(side=tk.TOP, fill=tk.X)
+        self.label_stage = tk.Label(frame_end, bg=master_color_1, fg=master_color_4, font='Calibri 13',
+                                    image=self.add_img_light_red)
+        self.label_stage.pack()
 
     # Метод заполнения полей значениями из файла и проверки
     def fill_entry(self):
@@ -161,17 +187,15 @@ class Main(tk.Frame):
             self.save_session_data()
             self.transfer_password()
 
-            process = subprocess.Popen([sys.executable, "first.py"])
-            process.wait()
-            time.sleep(0.1)
+            self.entry_id.config(state=tk.DISABLED)
+            self.entry_hash.config(state=tk.DISABLED)
+            self.entry_friend.config(state=tk.DISABLED)
+            self.entry_password.config(state=tk.DISABLED)
 
-            process2 = subprocess.Popen([sys.executable, "second.py"])
-            process2.wait()
-            time.sleep(0.1)
+            self.button_connect.config(state=tk.DISABLED)
 
-            process3 = subprocess.Popen([sys.executable, "third.py"])
-            # process3.wait()
-            time.sleep(0.1)
+            self.label_stage.config(image=self.add_img_light_yellow)
+            self.label_connection.config(text='Пожалуйста, подождите. Идет соединение...')
 
 
 # Класс для создания окна "Об авторе"
@@ -184,7 +208,7 @@ class About(tk.Toplevel):
     def init_child(self):
         self.title("Об авторе")
         # self.geometry("300x300+400+150")
-        self.geometry("+400+150")
+        self.geometry("+400+200")
         self.iconbitmap('image/main_icon.ico')
         self.resizable(False, False)
         self.grab_set()

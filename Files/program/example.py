@@ -14,7 +14,7 @@ def connect():
     time.sleep(0.1)
 
     process3 = subprocess.Popen([sys.executable, "third.py"])
-    # process3.wait()
+    process3.wait()
     time.sleep(0.1)
 
 
