@@ -137,11 +137,15 @@ class Main(tk.Frame):
         self.label_connection.pack()
 
         # Фрэйм для полей ввода и лейблов
-        frame_end = tk.Frame(bg=master_color_1)
-        frame_end.pack(side=tk.TOP, fill=tk.X)
-        self.label_stage = tk.Label(frame_end, bg=master_color_1, fg=master_color_4, font='Calibri 13',
+        self.frame_end = tk.Frame(bg=master_color_1)
+        self.frame_end.pack(side=tk.TOP, fill=tk.X)
+        self.label_stage = tk.Label(self.frame_end, bg=master_color_1, fg=master_color_4, font='Calibri 13',
                                     image=self.add_img_light_red)
         self.label_stage.pack()
+
+        self.button_close = tk.Button(self.frame_end, text="Закрыть соединение", relief='groove', font='Tahoma',
+                                      state=tk.DISABLED)
+        self.button_close.pack()
 
     # Метод заполнения полей значениями из файла и проверки
     def fill_entry(self):
@@ -180,22 +184,59 @@ class Main(tk.Frame):
             file.writelines(' ')
         file.close()
 
+    def do_process(self):
+        process = subprocess.Popen([sys.executable, "first.py"])
+        process.wait()
+        time.sleep(0.1)
+
+        process2 = subprocess.Popen([sys.executable, "second.py"])
+        process2.wait()
+        time.sleep(0.1)
+
+        self.label_stage.config(image=self.add_img_light_green)
+        self.label_connection.config(text='Соединение активно')
+
+        process3 = subprocess.Popen([sys.executable, "third.py"])
+        # process3.wait()
+        time.sleep(0.1)
+
+        def kill():
+            process3.kill()
+            self.label_stage.config(image=self.add_img_light_red)
+            self.label_connection.config(text='Соединение отсутствует')
+            self.button_close.config(state=tk.DISABLED)
+
+            self.entry_id.config(state=tk.NORMAL)
+            self.entry_hash.config(state=tk.NORMAL)
+            self.entry_friend.config(state=tk.NORMAL)
+            self.entry_password.config(state=tk.NORMAL)
+
+            self.button_connect.config(state=tk.NORMAL)
+
+        self.button_close.config(state=tk.NORMAL, command=kill)
+
+    def stop_use(self):
+        self.entry_id.config(state=tk.DISABLED)
+        self.entry_hash.config(state=tk.DISABLED)
+        self.entry_friend.config(state=tk.DISABLED)
+        self.entry_password.config(state=tk.DISABLED)
+
+        self.button_connect.config(state=tk.DISABLED)
+
+        self.label_stage.config(image=self.add_img_light_yellow)
+        self.label_connection.config(text='Пожалуйста, подождите. Идет соединение...')
+
     def start_connect(self):
         if self.entry_id.get() == '' or self.entry_hash.get() == '' or self.entry_friend.get() == '':
             messagebox.showerror("Ошибка ввода данных", "Недостаточно данных!\nСоединение не удалось...")
         else:
             self.save_session_data()
             self.transfer_password()
+            self.stop_use()
+            messagebox.showwarning('Внимание',
+                                   'Начинается процесс подключения. Это может занять некоторое время.\nПожалуйста подождите...')
 
-            self.entry_id.config(state=tk.DISABLED)
-            self.entry_hash.config(state=tk.DISABLED)
-            self.entry_friend.config(state=tk.DISABLED)
-            self.entry_password.config(state=tk.DISABLED)
-
-            self.button_connect.config(state=tk.DISABLED)
-
-            self.label_stage.config(image=self.add_img_light_yellow)
-            self.label_connection.config(text='Пожалуйста, подождите. Идет соединение...')
+            self.do_process()
 
 
 # Класс для создания окна "Об авторе"
@@ -314,7 +355,7 @@ if __name__ == "__main__":
     app = Main(root)
     app.pack()
     root.title("Securegram")
-    root.geometry("+300+100")
+    root.geometry("+300+40")
     root.iconbitmap('image/main_icon.ico')
     # root.wm_attributes('-alpha', 0.94)
     root.resizable(False, False)

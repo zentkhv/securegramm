@@ -85,7 +85,6 @@ def Enter_pressed(event):
 
     # Формирование строки вывода в окно и непосредственно вывод
     messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {self_name}: {input_get}')
-
     input_user.set('')
 
     return "break"
