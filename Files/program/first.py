@@ -56,7 +56,7 @@ if cur.fetchone() is None:
     cur.execute("""INSERT INTO Account(API_ID, API_HASH, NAME, ID_SOB, MY_ID) VALUES (?,?,?,?,?);""",
                 (api_id, api_hash, name, id_sob, my_id))
     db.commit()
-    print("Зарегистрированно!")
+    # print("Зарегистрированно!")
 
 z = 1
 
@@ -64,8 +64,8 @@ while True:
     session = "anon3" + str(z)
     client = TelegramClient(session, api_id, api_hash)
     client.start()
-    print("Аккаунт: " + str(z) + " Вход выполнен успешно!")
+    # print("Аккаунт: " + str(z) + " Вход выполнен успешно!")
     z = z + 1
     if z == 3:
-        print("Аккауты активированы!")
+        # print("Аккауты активированы!")
         break

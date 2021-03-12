@@ -28,14 +28,14 @@ time.sleep(0.1)
 
 cur.execute(f"SELECT NAME FROM Account WHERE ID = '{1}'")
 name = str(cur.fetchone()[0])
-print(name)
+# print(name)
 time.sleep(0.1)
 
 entity = client.get_entity(name)
 
 id_Friend = entity.id
 m = str(id_Friend)
-print(m)
+# print(m)
 time.sleep(0.1)
 cur.execute(f'UPDATE Account SET ID_SOB = ? WHERE ID = ?', (m, 1))
 db.commit()

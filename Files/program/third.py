@@ -54,9 +54,9 @@ time.sleep(0.1)
 
 def Enter_pressed(event):
     input_get = input_field.get()
-    print(input_get)
+    # print(input_get)
 
-    print("Зашифровка")
+    # print("Зашифровка")
 
     sms = lorem.sentence()
 
@@ -70,7 +70,7 @@ def Enter_pressed(event):
 
     os.system("stegcloak hide --config 1.json")
 
-    print("Отправка шифровки")
+    # print("Отправка шифровки")
 
     cur.execute(f"SELECT NAME FROM Account WHERE ID = '{1}'")
     name = str(cur.fetchone()[0])
@@ -121,7 +121,7 @@ async def async_run_events(loop):
 
             with open("out2.txt", "r") as f1:
                 data2 = f1.read()
-            print(data2)
+            # print(data2)
 
         # Формирование строки вывода  в окно и непосредственно вывод
         messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {friend}: {data2}')
