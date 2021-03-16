@@ -4,3 +4,4 @@ WHERE Product.model=PC.model AND Product.maker NOT IN (SELECT DISTINCT Product.m
 FROM Product, Laptop
 WHERE Product.model=Laptop.model
 )
+Использование в запросе нескольких источников записей

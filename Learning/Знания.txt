@@ -1,4 +1,4 @@
 - Базы данных SQL, основы, запросы, СУБД Oracle, PL/SQL
 - ОС Linux, работа с командной строкой
 - Программирование, написание скриптов python, bash и прочее.
-- Средства автоматизации (Jenkins), Openshift (Docker, Kubernetes и пр.)
+- Средства автоматизации (Jenkins, Openshift: Docker, Kubernetes и тд и тп.)
