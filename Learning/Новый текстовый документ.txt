@@ -1,7 +1,6 @@
-SELECT DISTINCT Product.maker 
-FROM Product, PC
-WHERE Product.model=PC.model AND Product.maker NOT IN (SELECT DISTINCT Product.maker 
+SELECT Product.maker
+FROM Product, PC, (SELECT Product.maker a_maker
 FROM Product, Laptop
-WHERE Product.model=Laptop.model
-)
-Использование в запросе нескольких источников записей
+WHERE Laptop.speed>=750) a
+WHERE PC.speed>=750 AND
+Product.maker IN a
