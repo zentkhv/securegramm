@@ -1,0 +1,7 @@
+Интерпретатор на ноуте:
+C:\Users\Михаил\AppData\Local\Programs\Python\Python38
+
+Программа на ноуте:
+C:\Users\Михаил\Desktop\Новая папка\securegramm\Files\program
+
+C:\Users\Михаил\Desktop\program
