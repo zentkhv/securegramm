@@ -26,7 +26,8 @@ async def manager_subscribe(message):
 
 
 # Обновление номера телефона
-async def phone_number_update(message):
+async def phone_number_update(message, username, phone_number):
+    db.update_phone_number(username, phone_number)
     await bot.send_message(message.from_user.id, 'Мы сохранили твой номер для связи, спасибо!')
 
 
@@ -76,7 +77,9 @@ async def process_callback_button_unsubscribe(callback_query: types.CallbackQuer
 # Обработка прочих сообщений
 @dp.message_handler(content_types=['contact'])
 async def get_contact(message: types.Message):
-    await bot.send_message(message.from_user.id, message.contact["phone_number"])
+    db.update_phone_number(message.contact["user_id"], message.contact["phone_number"])
+    db.add_history_log(message.from_user.id, message.from_user.username, message.contact["phone_number"])  # логирование
+    await bot.send_message(message.from_user.id, 'Мы сохранили твой номер для связи, спасибо!')
 
 
 # Обработка прочих сообщений

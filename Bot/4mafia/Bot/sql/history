@@ -1,0 +1,3 @@
+SELECT * 
+FROM history
+WHERE user_name='zentkhv'
