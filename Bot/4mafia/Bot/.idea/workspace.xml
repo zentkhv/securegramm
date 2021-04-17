@@ -4,7 +4,16 @@
     <list default="true" id="f025ab2f-7783-4c85-810d-569cdecb920c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboards.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.db" beforeDir="false" afterPath="$PROJECT_DIR$/main.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlighter.py" beforeDir="false" afterPath="$PROJECT_DIR$/sqlighter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Хьюди Хоу/bot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Хьюди Хоу/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Хьюди Хоу/db.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Хьюди Хоу/lastkey.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Хьюди Хоу/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Хьюди Хоу/sqlighter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Хьюди Хоу/stopgame.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
