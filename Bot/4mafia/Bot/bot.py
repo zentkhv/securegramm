@@ -1,12 +1,13 @@
 import config  # скрипт с конфигурацией бота
 import logging  # библиотека для вывода логов в консоль
 import keyboards  # скрипт со всеми клавиатурами
+# import events  # скрипт для обработки прочих событий
 # import asyncio
 
 from aiogram import Bot, Dispatcher, executor, types  # элементы библиотеки для работы с ботом
 from sqlighter import SQLighter  # класс для работы с бд sql
 
-# задаем уровень логов
+# задаем уровень логов собыий бота
 logging.basicConfig(level=logging.INFO)
 
 # инициализируем бота
@@ -74,7 +75,7 @@ async def process_callback_button_unsubscribe(callback_query: types.CallbackQuer
     db.add_history_log(callback_query.from_user.id, callback_query.from_user.username, "Отписаться")
 
 
-# Обработка прочих сообщений
+# Обработка полученного контакти и запись его в базу
 @dp.message_handler(content_types=['contact'])
 async def get_contact(message: types.Message):
     db.update_phone_number(message.contact["user_id"], message.contact["phone_number"])
@@ -96,7 +97,7 @@ async def echo_message(message: types.Message):
         await phone_number_update(message)
     elif message.text == '📜️ Записать ник':
         await message.answer("Для того, чтобы мы знали твой никнем, нужно написать его в чат, поставив перед ним "
-                             "символ *\nВот так:\n*Raptor")
+                             "символ *, вот так:\n*Raptor")
     elif message.text[0] == '*':  # Обработка события по добавлению никнейма в базу
         if len(message.text) == 1:
             await bot.send_message(message.from_user.id, 'Для того чтобы мы знали твой никнейм, нужно дописать его '
