@@ -1,4 +1,4 @@
-from telethon import sync, events   # Используется!
+from telethon import sync, events   # Используется
 import time
 from telethon import TelegramClient
 import sqlite3

@@ -59,6 +59,7 @@ def Enter_pressed(event):
     # print("Зашифровка")
 
     sms = lorem.sentence()
+    print(sms)
 
     with open("1.json") as f:
         data4 = f.read()
@@ -76,9 +77,13 @@ def Enter_pressed(event):
     name = str(cur.fetchone()[0])
 
     async def main():
-        with open("out.txt", "r") as f1:
-            data5 = f1.read()
-            xxx = str(data5)
+        #with open("out.txt", "r") as f1:
+        #    data5 = f1.read()
+        #    xxx = str(data5)
+        #    print(xxx)
+        f2 = open("out.txt")
+        xxx = str(f2.readlines()[0])
+        print(xxx)
         await client.send_message(name, xxx)
 
     client.loop.run_until_complete(main())
