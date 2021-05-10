@@ -2,8 +2,9 @@ import tkinter as tk
 from tkinter import messagebox
 import re
 import subprocess
-import sys  # Используется!
+import sys
 import time
+import about
 from tkinter import *
 
 # Мастер-цвета
@@ -229,12 +230,16 @@ class Main(tk.Frame):
     def start_connect(self):
         if self.entry_id.get() == '' or self.entry_hash.get() == '' or self.entry_friend.get() == '':
             messagebox.showerror("Ошибка ввода данных", "Недостаточно данных!\nСоединение не удалось...")
+        elif self.entry_password.get() == '':
+            messagebox.showerror("Ошибка ввода данных", "Необходимо указать секретный пароль!\nЭто необходимо для "
+                                                        "конфиденциальности переписки.")
         else:
             self.save_session_data()
             self.transfer_password()
             self.stop_use()
             messagebox.showwarning('Внимание',
-                                   'Начинается процесс подключения. Это может занять некоторое время.\nПожалуйста подождите...')
+                                   'Начинается процесс подключения. Это может занять некоторое время.\nПожалуйста '
+                                   'подождите...')
 
             self.do_process()
 
@@ -257,10 +262,10 @@ class About(tk.Toplevel):
 
         frame_about = tk.Frame(self, bg=master_color_1)
         frame_about.pack()
-        text_value = "Автор программы: Ильченко Михаил Александрович"
+        text_value = about.text_author()
         label_about = tk.Label(frame_about, bg=master_color_1, fg=master_color_4, font='Calibri 13', text=text_value)
         label_about.pack()
-        text_value1 = "Группа: СО251КОБ\n\nВконтакте: https://vk.com/mikhail27rus\nЯзык программирования: Python"
+        text_value1 = about.text_about()
         label_about1 = tk.Label(frame_about, bg=master_color_1, fg=master_color_4, font='Calibri 13', text=text_value1)
         label_about1.pack()
 
@@ -283,7 +288,7 @@ class Info(tk.Toplevel):
 
         frame_about = tk.Frame(self, bg=master_color_1)
         frame_about.pack()
-        text_value = "Добро пожаловать в Securegram!\n\nЭта программа предназначена для безопасного обмена сообщениями."
+        text_value = about.text_program()
         label_about = tk.Label(frame_about, bg=master_color_1, fg=master_color_4, font='Calibri 13', text=text_value)
         label_about.pack()
 

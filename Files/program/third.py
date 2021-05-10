@@ -10,6 +10,8 @@ import os
 from lorem_text import lorem
 from datetime import datetime
 import sys
+import pyperclip
+import main_GOST
 
 db = sqlite3.connect('Account.db', timeout=30)
 cur = db.cursor()
@@ -54,10 +56,11 @@ time.sleep(0.1)
 
 def Enter_pressed(event):
     input_get = input_field.get()
-    # print(input_get)
 
-    # print("Зашифровка")
+    # Шифрование ГОСТ
+    hide = main_GOST.encrypt(input_get)
 
+    # Начало формирование сообщения stegcloak
     sms = lorem.sentence()
     print(sms)
 
@@ -65,7 +68,7 @@ def Enter_pressed(event):
         data4 = f.read()
     d = json.loads(data4)
     d["cover"] = sms
-    d["secret"] = input_get
+    d["secret"] = hide
     with open("1.json", 'w') as f:
         f.write(json.dumps(d))
 
@@ -77,14 +80,7 @@ def Enter_pressed(event):
     name = str(cur.fetchone()[0])
 
     async def main():
-        #with open("out.txt", "r") as f1:
-        #    data5 = f1.read()
-        #    xxx = str(data5)
-        #    print(xxx)
-        f2 = open("out.txt")
-        xxx = str(f2.readlines()[0])
-        print(xxx)
-        await client.send_message(name, xxx)
+        await client.send_message(name, pyperclip.paste())
 
     client.loop.run_until_complete(main())
 
@@ -126,19 +122,15 @@ async def async_run_events(loop):
 
             with open("out2.txt", "r") as f1:
                 data2 = f1.read()
-            # print(data2)
+
+        # Расшифровка ГОСТ
+        end_data = main_GOST.decrypt(data2)
 
         # Формирование строки вывода  в окно и непосредственно вывод
-        messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {friend}: {data2}')
-
-    # messages.insert(INSERT, '%s\n' % data2)
+        messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {friend}: {end_data}')
 
     await eventing_client.run_until_disconnected()
 
 
 threading.Thread(target=run_bot_events).start()
 window.mainloop()
-
-
-
-
