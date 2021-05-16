@@ -1,4 +1,4 @@
-from telethon import sync, events   # Используется
+from telethon import sync, events
 import time
 from telethon import TelegramClient
 import sqlite3
@@ -35,10 +35,7 @@ entity = client.get_entity(name)
 
 id_Friend = entity.id
 m = str(id_Friend)
-# print(m)
 time.sleep(0.1)
 cur.execute(f'UPDATE Account SET ID_SOB = ? WHERE ID = ?', (m, 1))
 db.commit()
 time.sleep(0.1)
-
-

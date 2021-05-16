@@ -13,6 +13,7 @@ import sys
 import pyperclip
 import main_GOST
 
+
 db = sqlite3.connect('Account.db', timeout=30)
 cur = db.cursor()
 
@@ -54,15 +55,16 @@ zorro = int(id_sob)
 time.sleep(0.1)
 
 
-def Enter_pressed(event):
+def enter_pressed(event):
     input_get = input_field.get()
-
+    print("Этап 0. Получено сообщение: " + input_get)
     # Шифрование ГОСТ
     hide = main_GOST.encrypt(input_get)
+    print("Этап 1. Применен шифр ГОСТ: " + hide)
 
     # Начало формирование сообщения stegcloak
     sms = lorem.sentence()
-    print(sms)
+    print("Этап 2. Сгенерирована фраза: " + sms)
 
     with open("1.json") as f:
         data4 = f.read()
@@ -73,9 +75,9 @@ def Enter_pressed(event):
         f.write(json.dumps(d))
 
     os.system("stegcloak hide --config 1.json")
+    print("Этап 3. Применено шифрование AES256, сообщение сокрыто: " + pyperclip.paste())
 
     # print("Отправка шифровки")
-
     cur.execute(f"SELECT NAME FROM Account WHERE ID = '{1}'")
     name = str(cur.fetchone()[0])
 
@@ -87,7 +89,6 @@ def Enter_pressed(event):
     # Формирование строки вывода в окно и непосредственно вывод
     messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {self_name}: {input_get}')
     input_user.set('')
-
     return "break"
 
 
@@ -96,7 +97,7 @@ frame = Frame(window)
 frame.pack()
 messages.pack()
 input_field.pack(side=BOTTOM, fill=X)
-input_field.bind("<Return>", Enter_pressed)
+input_field.bind("<Return>", enter_pressed)
 
 
 def run_bot_events():
@@ -111,6 +112,8 @@ async def async_run_events(loop):
     @eventing_client.on(events.newmessage.NewMessage(from_users=zorro))
     async def handler(event):
         hhh = event.message.message
+        print("Этап 0. Получено сообщение: " + hhh)
+
         if hhh is not None:
             with open("2.json") as f:
                 data3 = f.read()
@@ -122,9 +125,11 @@ async def async_run_events(loop):
 
             with open("out2.txt", "r") as f1:
                 data2 = f1.read()
+                print("Этап 1: Раскрыт следующий шифр-текст: " + data2)
 
         # Расшифровка ГОСТ
         end_data = main_GOST.decrypt(data2)
+        print("Этап 2. Расшифрованное сообщение: " + end_data)
 
         # Формирование строки вывода  в окно и непосредственно вывод
         messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {friend}: {end_data}')

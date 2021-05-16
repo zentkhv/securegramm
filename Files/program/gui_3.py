@@ -105,11 +105,19 @@ class Main(tk.Frame):
 
         # Объекты пароля
         label_password = setup_label()
-        label_password.config(text='Общий пароль')
+        label_password.config(text='Пароль AES')
 
         self.entry_password = setup_entry()
         self.entry_password.config(show='*')
 
+        # Объекты пароля ГОСТ
+        label_password_gost = setup_label()
+        label_password_gost.config(text='Пароль ГОСТ')
+
+        self.entry_password_gost = setup_entry()
+        self.entry_password_gost.config(show='*')
+
+        # Кнопка Подключиться
         self.button_connect = tk.Button(frame_entry, text="Подключиться", relief='groove', font='Tahoma',
                                         command=self.start_connect)
 
@@ -118,13 +126,15 @@ class Main(tk.Frame):
         label_hash.grid(row=1, column=0, sticky="W,E")
         label_friend.grid(row=2, column=0, sticky="W,E", padx=10)
         label_password.grid(row=3, column=0, sticky="W,E")
+        label_password_gost.grid(row=4, column=0, sticky="W,E")
 
         self.entry_id.grid(row=0, column=1, pady=5)
         self.entry_hash.grid(row=1, column=1, pady=5)
         self.entry_friend.grid(row=2, column=1, pady=5)
         self.entry_password.grid(row=3, column=1, pady=5)
+        self.entry_password_gost.grid(row=4, column=1, pady=5)
 
-        self.button_connect.grid(row=4, column=0, columnspan=2)
+        self.button_connect.grid(row=5, column=0, columnspan=2)
 
         # Разделяющий фрэйм
         frame_separation1 = tk.Frame(bg=master_color_5)
@@ -178,12 +188,21 @@ class Main(tk.Frame):
         file.close()
 
     def transfer_password(self):
+        # Запись общего пароля
         file = open('last_password.txt', 'w')
         if self.entry_password.get() != '':
             file.writelines(f'{self.entry_password.get()}')
         else:
             file.writelines(' ')
         file.close()
+
+        # Запись пароля ГОСТ
+        file1 = open('last_password_gost.txt', 'w')
+        if self.entry_password_gost.get() != '':
+            file1.writelines(f'{self.entry_password_gost.get()}')
+        else:
+            file1.writelines(' ')
+        file1.close()
 
     def do_process(self):
         process = subprocess.Popen([sys.executable, "first.py"])
@@ -211,6 +230,7 @@ class Main(tk.Frame):
             self.entry_hash.config(state=tk.NORMAL)
             self.entry_friend.config(state=tk.NORMAL)
             self.entry_password.config(state=tk.NORMAL)
+            self.entry_password_gost.config(state=tk.NORMAL)
 
             self.button_connect.config(state=tk.NORMAL)
 
@@ -221,6 +241,7 @@ class Main(tk.Frame):
         self.entry_hash.config(state=tk.DISABLED)
         self.entry_friend.config(state=tk.DISABLED)
         self.entry_password.config(state=tk.DISABLED)
+        self.entry_password_gost.config(state=tk.DISABLED)
 
         self.button_connect.config(state=tk.DISABLED)
 
@@ -230,8 +251,8 @@ class Main(tk.Frame):
     def start_connect(self):
         if self.entry_id.get() == '' or self.entry_hash.get() == '' or self.entry_friend.get() == '':
             messagebox.showerror("Ошибка ввода данных", "Недостаточно данных!\nСоединение не удалось...")
-        elif self.entry_password.get() == '':
-            messagebox.showerror("Ошибка ввода данных", "Необходимо указать секретный пароль!\nЭто необходимо для "
+        elif self.entry_password.get() == '' or self.entry_password_gost.get() == '':
+            messagebox.showerror("Ошибка ввода данных", "Необходимо указать секретные пароли!\nЭто необходимо для "
                                                         "конфиденциальности переписки.")
         else:
             self.save_session_data()
@@ -359,7 +380,7 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = Main(root)
     app.pack()
-    root.title("Securegram")
+    root.title("Securegram. Безопасное общение")
     root.geometry("+300+40")
     root.iconbitmap('image/main_icon.ico')
     # root.wm_attributes('-alpha', 0.94)

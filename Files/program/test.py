@@ -1,17 +1,13 @@
-import main_GOST
+from pip._vendor.pkg_resources import require
 
-message = '123'
-print('message: ' + message)
+cover = 'kdfgjmdkdfghfgh'
+password = '123'
+secret = 'hi'
 
-encryption = main_GOST.encrypt(message)
-print("encryption: " + encryption)
+StegCloak = require('stegcloak');
 
-decryption = main_GOST.decrypt(encryption)
-print('decryption: ' + decryption)
-for i in decryption:
-    print(i)
+a = StegCloak.hide(secret, password, cover)
+print(a)
 
-if message == decryption:
-    print('1')
-else:
-    print('0')
+b = StegCloak.reveal(a, password)
+print(b)

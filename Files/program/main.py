@@ -1,5 +1,5 @@
 import subprocess
-import sys   # Используется!
+import sys
 import time
 from tkinter import *
 

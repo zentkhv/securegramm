@@ -56,8 +56,6 @@ if cur.fetchone() is None:
     cur.execute("""INSERT INTO Account(API_ID, API_HASH, NAME, ID_SOB, MY_ID) VALUES (?,?,?,?,?);""",
                 (api_id, api_hash, name, id_sob, my_id))
     db.commit()
-    # print("Зарегистрированно!")
-
 z = 1
 
 while True:
