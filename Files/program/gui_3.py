@@ -206,19 +206,19 @@ class Main(tk.Frame):
 
     def do_process(self):
         process = subprocess.Popen([sys.executable, "first.py"])
-        process.wait()
+        # process.wait()
         time.sleep(0.1)
 
         process2 = subprocess.Popen([sys.executable, "second.py"])
-        process2.wait()
-        time.sleep(0.1)
+        # process2.wait()
+        time.sleep(0.7)
 
         self.label_stage.config(image=self.add_img_light_green)
         self.label_connection.config(text='Соединение активно')
 
         process3 = subprocess.Popen([sys.executable, "third.py"])
         # process3.wait()
-        time.sleep(0.1)
+        # time.sleep(0.1)
 
         def kill():
             process3.kill()
@@ -258,11 +258,13 @@ class Main(tk.Frame):
             self.save_session_data()
             self.transfer_password()
             self.stop_use()
-            messagebox.showwarning('Внимание',
-                                   'Начинается процесс подключения. Это может занять некоторое время.\nПожалуйста '
-                                   'подождите...')
+            #messagebox.showwarning('Внимание',
+            #                       'Начинается процесс подключения. Это может занять некоторое время.\nПожалуйста '
+            #                       'подождите...')
 
             self.do_process()
+            messagebox.showwarning('Внимание', "Соединение установлено! \n Пожалуйста, подождите. Сейчас откроется "
+                                               "диалоговое окно.")
 
 
 # Класс для создания окна "Об авторе"
