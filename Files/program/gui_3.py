@@ -14,7 +14,7 @@ import asyncio
 import threading
 import json
 import os
-from lorem_text import lorem
+import lorem
 from datetime import datetime
 import pyperclip
 

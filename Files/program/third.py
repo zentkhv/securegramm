@@ -7,12 +7,12 @@ from tkinter import *
 import threading
 import json
 import os
-from lorem_text import lorem
+# from lorem_text import lorem
 from datetime import datetime
 import sys
 import pyperclip
 import main_GOST
-
+import lorem
 
 db = sqlite3.connect('Account.db', timeout=30)
 cur = db.cursor()
