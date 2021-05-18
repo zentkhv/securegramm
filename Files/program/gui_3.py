@@ -4,6 +4,7 @@ import subprocess
 import sys
 import time
 import about
+import re
 from tkinter import *
 
 import sqlite3
