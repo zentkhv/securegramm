@@ -1,11 +1,22 @@
 import tkinter as tk
 from tkinter import messagebox
-import re
 import subprocess
 import sys
 import time
 import about
 from tkinter import *
+
+import sqlite3
+from telethon import TelegramClient
+from telethon import sync, events
+import json
+import asyncio
+import threading
+import json
+import os
+from lorem_text import lorem
+from datetime import datetime
+import pyperclip
 
 # Мастер-цвета
 master_color_1 = '#f0f0f0'

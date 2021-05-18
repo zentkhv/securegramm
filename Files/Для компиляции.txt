@@ -5,3 +5,5 @@ C:\Users\Михаил\AppData\Local\Programs\Python\Python38
 C:\Users\Михаил\Desktop\Новая папка\securegramm\Files\program
 
 C:\Users\Михаил\Desktop\program
+
+pyinstaller gui_3.py --exclude-module PyQt5
