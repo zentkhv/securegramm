@@ -1,12 +1,11 @@
 telethon~=1.20
 asyncio~=3.4.3
-tkinter
 pysqlite3
 threaded
-pycryptodome
-lorem-text
 datetime~=4.3
 
 future~=0.18.2
 about~=5.2
 pyperclip~=1.8.2
+pip~=21.1.1
+lorem~=0.1.1
