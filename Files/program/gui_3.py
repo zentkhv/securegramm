@@ -18,6 +18,7 @@ import os
 import lorem
 from datetime import datetime
 import pyperclip
+import main
 
 # Мастер-цвета
 master_color_1 = '#f0f0f0'
@@ -270,10 +271,6 @@ class Main(tk.Frame):
             self.save_session_data()
             self.transfer_password()
             self.stop_use()
-            #messagebox.showwarning('Внимание',
-            #                       'Начинается процесс подключения. Это может занять некоторое время.\nПожалуйста '
-            #                       'подождите...')
-
             self.do_process()
             messagebox.showwarning('Внимание', "Соединение установлено! \n Пожалуйста, подождите. Сейчас откроется "
                                                "диалоговое окно.")
