@@ -1,13 +1,7 @@
-from pip._vendor.pkg_resources import require
+import inspect, os.path
 
-cover = 'kdfgjmdkdfghfgh'
-password = '123'
-secret = 'hi'
+filename = inspect.getframeinfo(inspect.currentframe()).filename
+path = os.path.dirname(os.path.abspath(filename))
 
-StegCloak = require('stegcloak');
+print(path)
 
-a = StegCloak.hide(secret, password, cover)
-print(a)
-
-b = StegCloak.reveal(a, password)
-print(b)
