@@ -1,0 +1,82 @@
+C:\123\program>pyinstaller gui_3.py
+291 INFO: PyInstaller: 4.3
+291 INFO: Python: 3.8.10
+291 INFO: Platform: Windows-10-10.0.17763-SP0
+308 INFO: wrote C:\123\program\gui_3.spec
+308 INFO: UPX is not available.
+308 INFO: Extending PYTHONPATH with paths
+['C:\\123\\program', 'C:\\123\\program']
+399 INFO: checking Analysis
+399 INFO: Building Analysis because Analysis-00.toc is non existent
+399 INFO: Initializing module dependency graph...
+399 INFO: Caching module graph hooks...
+417 WARNING: Several hooks defined for module 'win32ctypes.core'. Please take care they do not conflict.
+454 INFO: Analyzing base_library.zip ...
+5399 INFO: Processing pre-find module path hook distutils from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks\\pre_find_module_path\\hook-distutils.py'.
+5399 INFO: distutils: retargeting to non-venv dir 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib'
+11073 INFO: Caching module dependency graph...
+11631 INFO: running Analysis Analysis-00.toc
+11631 INFO: Adding Microsoft.Windows.Common-Controls to dependent assemblies of final executable
+  required by c:\users\admin\appdata\local\programs\python\python38\python.exe
+11771 INFO: Analyzing C:\123\program\gui_3.py
+18459 INFO: Processing module hooks...
+18459 INFO: Loading module hook 'hook-difflib.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18477 INFO: Loading module hook 'hook-distutils.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18477 INFO: Loading module hook 'hook-distutils.util.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18477 INFO: Loading module hook 'hook-encodings.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18621 INFO: Loading module hook 'hook-heapq.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18640 INFO: Loading module hook 'hook-lib2to3.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18731 INFO: Loading module hook 'hook-multiprocessing.util.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18731 INFO: Loading module hook 'hook-pickle.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18748 INFO: Loading module hook 'hook-sqlite3.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18929 INFO: Loading module hook 'hook-sysconfig.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18929 INFO: Loading module hook 'hook-xml.etree.cElementTree.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+18929 INFO: Loading module hook 'hook-xml.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+19053 INFO: Loading module hook 'hook-_tkinter.py' from 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks'...
+19359 INFO: checking Tree
+19359 INFO: Building Tree because Tree-00.toc is non existent
+19376 INFO: Building Tree Tree-00.toc
+19592 INFO: checking Tree
+19592 INFO: Building Tree because Tree-01.toc is non existent
+19592 INFO: Building Tree Tree-01.toc
+19754 INFO: checking Tree
+19754 INFO: Building Tree because Tree-02.toc is non existent
+19754 INFO: Building Tree Tree-02.toc
+19826 INFO: Looking for ctypes DLLs
+19916 INFO: Analyzing run-time hooks ...
+19916 INFO: Including run-time hook 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py'
+19935 INFO: Including run-time hook 'c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth__tkinter.py'
+19955 INFO: Looking for dynamic libraries
+20509 INFO: Looking for eggs
+20509 INFO: Using Python library c:\users\admin\appdata\local\programs\python\python38\python38.dll
+20509 INFO: Found binding redirects:
+[]
+20528 INFO: Warnings written to C:\123\program\build\gui_3\warn-gui_3.txt
+20690 INFO: Graph cross-reference written to C:\123\program\build\gui_3\xref-gui_3.html
+20779 INFO: checking PYZ
+20779 INFO: Building PYZ because PYZ-00.toc is non existent
+20779 INFO: Building PYZ (ZlibArchive) C:\123\program\build\gui_3\PYZ-00.pyz
+22685 INFO: Building PYZ (ZlibArchive) C:\123\program\build\gui_3\PYZ-00.pyz completed successfully.
+22721 INFO: checking PKG
+22721 INFO: Building PKG because PKG-00.toc is non existent
+22721 INFO: Building PKG (CArchive) PKG-00.pkg
+22775 INFO: Building PKG (CArchive) PKG-00.pkg completed successfully.
+22775 INFO: Bootloader c:\users\admin\appdata\local\programs\python\python38\lib\site-packages\PyInstaller\bootloader\Windows-64bit\run.exe
+22775 INFO: checking EXE
+22775 INFO: Building EXE because EXE-00.toc is non existent
+22775 INFO: Building EXE from EXE-00.toc
+22775 INFO: Copying icons from ['c:\\users\\admin\\appdata\\local\\programs\\python\\python38\\lib\\site-packages\\PyInstaller\\bootloader\\images\\icon-console.ico']
+22793 INFO: Writing RT_GROUP_ICON 0 resource with 104 bytes
+22793 INFO: Writing RT_ICON 1 resource with 3752 bytes
+22793 INFO: Writing RT_ICON 2 resource with 2216 bytes
+22793 INFO: Writing RT_ICON 3 resource with 1384 bytes
+22793 INFO: Writing RT_ICON 4 resource with 37019 bytes
+22793 INFO: Writing RT_ICON 5 resource with 9640 bytes
+22793 INFO: Writing RT_ICON 6 resource with 4264 bytes
+22793 INFO: Writing RT_ICON 7 resource with 1128 bytes
+22810 INFO: Appending archive to EXE C:\123\program\build\gui_3\gui_3.exe
+24034 INFO: Building EXE from EXE-00.toc completed successfully.
+24034 INFO: checking COLLECT
+24034 INFO: Building COLLECT because COLLECT-00.toc is non existent
+24034 INFO: Building COLLECT COLLECT-00.toc
+26318 INFO: Building COLLECT COLLECT-00.toc completed successfully.
