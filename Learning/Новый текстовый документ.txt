@@ -1,6 +1,0 @@
-SELECT Product.maker
-FROM Product, PC, (SELECT Product.maker a_maker
-FROM Product, Laptop
-WHERE Laptop.speed>=750) a
-WHERE PC.speed>=750 AND
-Product.maker IN a
