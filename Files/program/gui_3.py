@@ -6,6 +6,8 @@ import time
 import about
 import re
 from tkinter import *
+import webbrowser
+import inspect, os.path
 
 import sqlite3
 from telethon import TelegramClient
@@ -60,17 +62,17 @@ class Main(tk.Frame):
         def setup_button():
             return tk.Button(frame_toolbar, bg=master_color_1, bd=0, fg=master_color_4, compound=tk.TOP, font='Tahoma')
 
-        # Кнопка "Смена ника"
-        button_rename = setup_button()
-        button_rename.config(text="Смена имени", image=self.add_img_rename, command=self.open_nickname)
-        # button_rename.pack(side=tk.LEFT)
-        button_rename.grid(row=0, column=0, padx=20)
-
         # Кнопка "О программе"
         button_info = setup_button()
         button_info.config(text="О программе", image=self.add_img_info, command=self.open_info)
         # button_info.pack(side=tk.LEFT)
-        button_info.grid(row=0, column=1, padx=20)
+        button_info.grid(row=0, column=0, padx=20)
+
+        # Кнопка "Смена ника"
+        button_rename = setup_button()
+        button_rename.config(text="Смена имени", image=self.add_img_rename, command=self.open_nickname)
+        # button_rename.pack(side=tk.LEFT)
+        button_rename.grid(row=0, column=1, padx=20)
 
         # Кнопка "Об авторе"
         button_about = setup_button()
@@ -218,18 +220,22 @@ class Main(tk.Frame):
         file1.close()
 
     def do_process(self):
-        process = subprocess.Popen([sys.executable, "first.py"])
+        filename = inspect.getframeinfo(inspect.currentframe()).filename
+        path = os.path.dirname(os.path.abspath(filename))
+
+        process = subprocess.Popen([path + "\Python38\python.exe", "first.py"])
         # process.wait()
         time.sleep(0.1)
 
-        process2 = subprocess.Popen([sys.executable, "second.py"])
+        process2 = subprocess.Popen([path + "\Python38\python.exe", "second.py"])
         # process2.wait()
         time.sleep(0.7)
 
         self.label_stage.config(image=self.add_img_light_green)
         self.label_connection.config(text='Соединение активно')
 
-        process3 = subprocess.Popen([sys.executable, "third.py"])
+        process3 = subprocess.Popen([path + "\Python38\python.exe", "third.py"])
+
         # process3.wait()
         # time.sleep(0.1)
 
@@ -318,11 +324,34 @@ class Info(tk.Toplevel):
         self.grab_set()
         self.focus_set()
 
+        def button_link():
+            webbrowser.open('https://core.telegram.org/api/obtaining_api_id')
+
+        def button_stage2():
+            filename = inspect.getframeinfo(inspect.currentframe()).filename
+            path = os.path.dirname(os.path.abspath(filename))
+            os.system(path + "\install\install.msi")
+
+        def button_stage3():
+            os.system("npm install -g stegcloak")
+
         frame_about = tk.Frame(self, bg=master_color_1)
         frame_about.pack()
         text_value = about.text_program()
         label_about = tk.Label(frame_about, bg=master_color_1, fg=master_color_4, font='Calibri 13', text=text_value)
         label_about.pack()
+
+        button_link = tk.Button(frame_about, text="Этап 1. Получение данных API", relief='groove', font='Calibri 13',
+                                command=button_link)
+        button_link.pack()
+
+        button_stage2 = tk.Button(frame_about, text="Этап 2. Установка Node.JS", relief='groove', font='Calibri 13',
+                                  command=button_stage2)
+        button_stage2.pack()
+
+        button_stage3 = tk.Button(frame_about, text="Этап 3. Установка stegcloak\n(Занимает время)", relief='groove', font='Calibri 13',
+                                  command=button_stage3)
+        button_stage3.pack()
 
 
 # Класс для создания окна "Сменить ник"
@@ -333,7 +362,7 @@ class Nickname(tk.Toplevel):
         self.init_child()
 
     def init_child(self):
-        self.title("Смена ника")
+        self.title("Локальная смена ника")
         # self.geometry("300x300+400+150")
         self.geometry("+400+150")
         self.iconbitmap('image/main_icon.ico')
