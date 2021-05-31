@@ -1,7 +1,0 @@
-telethon
-asyncio
-tkintertable
-pysqlite3
-threaded
-pycryptodome
-lorem-text
