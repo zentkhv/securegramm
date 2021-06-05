@@ -8,6 +8,7 @@ import re
 from tkinter import *
 import webbrowser
 import inspect, os.path
+import requests
 
 import sqlite3
 from telethon import TelegramClient
@@ -274,15 +275,21 @@ class Main(tk.Frame):
             messagebox.showerror("Ошибка ввода данных", "Необходимо указать секретные пароли!\nЭто необходимо для "
                                                         "конфиденциальности переписки.")
         else:
-            self.save_session_data()
-            self.transfer_password()
-            self.stop_use()
-            self.do_process()
-            messagebox.showwarning('Внимание', "Соединение установлено! \n Пожалуйста, подождите. Сейчас откроется "
-                                               "диалоговое окно.")
+            try:
+                requests.get("https://core.telegram.org/api/obtaining_api_id", timeout=3)
+                self.save_session_data()
+                self.transfer_password()
+                self.stop_use()
+                self.do_process()
+                messagebox.showwarning('Внимание', "Соединение установлено! \n Пожалуйста, подождите. Сейчас откроется "
+                                                   "диалоговое окно.")
+            except:
+                messagebox.showerror('Ошибка!', "Во время подключения произошла ошибка! Проверьте правильность "
+                                                "введенных данных, подключение к интернету и попробуйте снова.")
+
+            # Класс для создания окна "Об авторе"
 
 
-# Класс для создания окна "Об авторе"
 class About(tk.Toplevel):
     # Конструктор
     def __init__(self):
@@ -349,7 +356,8 @@ class Info(tk.Toplevel):
                                   command=button_stage2)
         button_stage2.pack()
 
-        button_stage3 = tk.Button(frame_about, text="Этап 3. Установка stegcloak\n(Занимает время)", relief='groove', font='Calibri 13',
+        button_stage3 = tk.Button(frame_about, text="Этап 3. Установка stegcloak\n(Занимает время)", relief='groove',
+                                  font='Calibri 13',
                                   command=button_stage3)
         button_stage3.pack()
 
