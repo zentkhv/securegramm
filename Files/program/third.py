@@ -7,7 +7,6 @@ from tkinter import *
 import threading
 import json
 import os
-# from lorem_text import lorem
 from datetime import datetime
 import sys
 import pyperclip
@@ -57,6 +56,7 @@ time.sleep(0.1)
 
 def enter_pressed(event):
     input_get = input_field.get()
+    print("------------------------------------------")
     print("Этап 0. Получено сообщение: " + input_get)
     # Шифрование ГОСТ
     hide = main_GOST.encrypt(input_get)
@@ -87,7 +87,8 @@ def enter_pressed(event):
     client.loop.run_until_complete(main())
 
     # Формирование строки вывода в окно и непосредственно вывод
-    messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {self_name}: {input_get}')
+    messages.insert(INSERT, f'\n{datetime.now().strftime("%d.%m.%y %H:%M")} {self_name}: {input_get}')
+    # messages.insert(INSERT, f"\n{input_get}")
     input_user.set('')
     return "break"
 
@@ -112,6 +113,7 @@ async def async_run_events(loop):
     @eventing_client.on(events.newmessage.NewMessage(from_users=zorro))
     async def handler(event):
         hhh = event.message.message
+        print("------------------------------------------")
         print("Этап 0. Получено сообщение: " + hhh)
 
         if hhh is not None:
@@ -132,7 +134,8 @@ async def async_run_events(loop):
         print("Этап 2. Расшифрованное сообщение: " + end_data)
 
         # Формирование строки вывода  в окно и непосредственно вывод
-        messages.insert(INSERT, '%s\n' % f'{datetime.now().strftime("%d.%m.%y %H:%M")} {friend}: {end_data}')
+        messages.insert(INSERT, f'\n{datetime.now().strftime("%d.%m.%y %H:%M")} {friend}: {end_data}')
+        # messages.insert(INSERT, f"\n{end_data}")
 
     await eventing_client.run_until_disconnected()
 

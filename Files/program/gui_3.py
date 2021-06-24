@@ -225,11 +225,11 @@ class Main(tk.Frame):
         path = os.path.dirname(os.path.abspath(filename))
 
         process = subprocess.Popen([path + "\Python38\python.exe", "first.py"])
-        # process.wait()
-        time.sleep(0.1)
+        process.wait()
+        time.sleep(0.5)
 
         process2 = subprocess.Popen([path + "\Python38\python.exe", "second.py"])
-        # process2.wait()
+        process2.wait()
         time.sleep(0.7)
 
         self.label_stage.config(image=self.add_img_light_green)
